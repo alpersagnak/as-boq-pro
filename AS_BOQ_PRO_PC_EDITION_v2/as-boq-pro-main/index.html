@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f766e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="A.S BOQ PRO" />
+  <title>A.S BOQ PRO</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.svg" />
+  <style>
+    :root{
+      --bg:#f3f6f8; --card:#fff; --ink:#16232b; --muted:#6b7a84;
+      --primary:#0f766e; --primary2:#115e59; --line:#dce5e8;
+      --ok:#15803d; --warn:#c2410c; --danger:#b91c1c; --sidebar:#102b31;
+      --shadow:0 10px 32px rgba(15,42,55,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+    body{min-height:100vh} button,input,select{font:inherit}
+    .app{min-height:100vh;display:grid;grid-template-columns:250px minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"side head" "side main"}
+    header{grid-area:head;position:sticky;top:0;z-index:5;background:rgba(243,246,248,.94);backdrop-filter:blur(12px);padding:18px 26px 12px;border-bottom:1px solid rgba(220,229,232,.8)}
+    .brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,var(--primary),#22c1b2);color:#fff;display:grid;place-items:center;font-weight:900;box-shadow:var(--shadow)}
+    h1{font-size:21px;margin:0}.sub{color:var(--muted);font-size:12px;margin-top:2px}.headrow{display:flex;justify-content:space-between;align-items:center;gap:18px}
+    .project-box{display:flex;align-items:center;gap:10px;min-width:320px}.project-box select{font-weight:700;background:#fff}.user-chip{padding:10px 13px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:13px;font-weight:700}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn{border:0;border-radius:11px;padding:10px 14px;background:#e7efef;color:var(--ink);font-weight:750;cursor:pointer}.btn:hover{filter:brightness(.98)}
+    .btn.primary{background:var(--primary);color:#fff}.btn.danger{background:#fee2e2;color:var(--danger)}
+    .tabs{grid-area:side;position:fixed;inset:0 auto 0 0;width:250px;background:var(--sidebar);padding:22px 16px;display:flex;flex-direction:column;gap:7px;z-index:10}
+    .side-brand{color:#fff;padding:2px 8px 22px;display:flex;align-items:center;gap:11px}.side-brand .logo{width:42px;height:42px}.side-brand strong{font-size:17px}.side-brand small{display:block;color:#a9bec3;margin-top:3px}
+    .tab{border:0;background:transparent;padding:12px 13px;color:#b7c9cd;font-size:14px;font-weight:750;text-align:left;border-radius:11px;cursor:pointer}.tab:hover{background:rgba(255,255,255,.06);color:#fff}.tab.active{background:#fff;color:var(--primary)}.tab .ico{display:inline-block;width:27px;font-size:18px;vertical-align:-1px}
+    main{grid-area:main;padding:22px 26px 40px;min-width:0}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow)}.kpi{grid-column:span 3;position:relative;overflow:hidden}.wide{grid-column:span 12}.half{grid-column:span 6}
+    .kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary)}.kpi:nth-child(2):before{background:#16a34a}.kpi:nth-child(3):before{background:#ea580c}.kpi:nth-child(4):before{background:#7c3aed}
+    .kpi .v{font-size:27px;font-weight:850;margin-top:9px}.kpi .l{font-size:12px;color:var(--muted);font-weight:700}.kpi .hint{font-size:11px;color:var(--muted);margin-top:8px}
+    .section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:5px 2px 11px}.section-title h2{font-size:18px;margin:0}.formgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+    label{font-size:12px;color:var(--muted);font-weight:750;display:block;margin-bottom:5px}input,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink);outline:none}input:focus,select:focus{border-color:#5eb8ae;box-shadow:0 0 0 3px rgba(15,118,110,.10)}.full{grid-column:1/-1}
+    .table-tools{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:14px 0 10px}.search{max-width:360px;position:relative}.search input{padding-left:36px}.search:before{content:"⌕";position:absolute;left:12px;top:7px;color:var(--muted);font-size:19px}
+    .quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.quick{border:1px solid var(--line);background:#fff;border-radius:13px;padding:14px;text-align:left;cursor:pointer}.quick b{display:block;margin-top:7px}.quick span{font-size:22px}.quick small{color:var(--muted)}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;background:#fff;box-shadow:var(--shadow)}table{border-collapse:collapse;width:100%;min-width:780px}th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;white-space:nowrap}th{background:#edf5f4;font-size:12px;color:#395057;position:sticky;top:0;z-index:1}td.num,th.num{text-align:right}
+    .pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#e6fffa;color:var(--primary2);font-size:11px;font-weight:850}.empty{padding:28px;text-align:center;color:var(--muted)}.row-actions button{border:0;background:transparent;font-size:16px;padding:3px 5px;cursor:pointer}.notice{font-size:12px;color:var(--muted);line-height:1.5}.bar{height:10px;border-radius:999px;background:#e6ecee;overflow:hidden}.bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--primary),#22c1b2)}
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#17262e;color:#fff;padding:11px 16px;border-radius:12px;z-index:20;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}
+    @media(max-width:980px){.app{grid-template-columns:82px minmax(0,1fr)}.tabs{width:82px;padding:18px 9px}.side-brand strong,.side-brand small,.tab:not(.active){font-size:0}.side-brand{padding-left:10px}.tab{text-align:center;padding:12px 4px}.tab .ico{width:auto;font-size:21px}.project-box{min-width:220px}.quick-actions{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:repeat(2,1fr)}.kpi{grid-column:span 6}}
+    @media(max-width:700px){.app{display:block}.tabs{position:fixed;top:auto;bottom:0;left:0;right:0;width:auto;height:auto;flex-direction:row;padding:8px;background:#fff;border-top:1px solid var(--line)}.side-brand{display:none}.tab,.tab:not(.active){font-size:11px;color:var(--muted);flex:1;text-align:center;padding:7px 2px}.tab.active{color:var(--primary);background:transparent}.tab .ico{display:block;font-size:20px;margin-bottom:2px}header{padding:12px 14px}.headrow{align-items:flex-start}.project-box,.user-chip{display:none}main{padding:14px 14px 88px}.kpi{grid-column:span 6}.wide,.half{grid-column:span 12}.formgrid{grid-template-columns:1fr 1fr}.quick-actions{grid-template-columns:1fr 1fr}.toolbar{margin-top:10px}.brand h1{font-size:18px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="headrow">
+      <div class="brand"><div class="logo">AS</div><div><h1>Kontrol Paneli</h1><div class="sub">Keşif • Birim Fiyat • Hakediş Yönetimi</div></div></div>
+      <div class="project-box"><label style="margin:0;white-space:nowrap">Aktif Proje</label><select id="projectSelect"><option>A.S BOQ PRO — Ana Proje</option></select><div class="user-chip">Alper Sağnak</div></div>
+    </div>
+    <div class="toolbar">
+      <button class="btn primary" onclick="exportData()">Yedekle</button>
+      <label class="btn" style="cursor:pointer">Yükle<input id="importFile" type="file" accept=".json" hidden onchange="importData(event)"></label>
+      <button class="btn" onclick="seedDemo()">Demo Veri</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <div class="side-brand"><div class="logo">AS</div><div><strong>A.S BOQ PRO</strong><small>PC Edition v2.0</small></div></div>
+    <button class="tab active" data-view="dashboard"><span class="ico">⌂</span>Panel</button>
+    <button class="tab" data-view="boq"><span class="ico">▦</span>BOQ Yönetimi</button>
+    <button class="tab" data-view="prices"><span class="ico">₺</span>Birim Fiyatlar</button>
+    <button class="tab" data-view="progress"><span class="ico">✓</span>Hakediş</button>
+    <button class="tab" data-view="summary"><span class="ico">Σ</span>Maliyet Özeti</button>
+  </nav>
+
+  <main>
+    <section id="dashboard" class="view active">
+      <div class="grid">
+        <div class="card wide" style="padding:14px"><div class="quick-actions">
+          <button class="quick" onclick="openView('boq')"><span>＋</span><b>Yeni Poz</b><small>BOQ listesine kayıt ekle</small></button>
+          <button class="quick" onclick="openView('progress')"><span>✓</span><b>Hakediş Gir</b><small>Dönemsel ilerleme ekle</small></button>
+          <button class="quick" onclick="openView('prices')"><span>₺</span><b>Birim Fiyat</b><small>Maliyet dağılımını düzenle</small></button>
+          <button class="quick" onclick="openView('summary')"><span>↗</span><b>Raporu Gör</b><small>Genel maliyet özetini aç</small></button>
+        </div></div>
+        <div class="card kpi"><div class="l">Toplam BOQ</div><div class="v" id="kpiBoq">₺0</div><div class="hint" id="kpiPozCount">0 aktif poz</div></div>
+        <div class="card kpi"><div class="l">Toplam Hakediş</div><div class="v" id="kpiProgress">₺0</div><div class="hint">Onaylanan gerçekleşme</div></div>
+        <div class="card kpi"><div class="l">Kalan İş</div><div class="v" id="kpiRemaining">₺0</div><div class="hint">Tamamlanmayı bekleyen tutar</div></div>
+        <div class="card kpi"><div class="l">Gerçekleşme</div><div class="v" id="kpiPercent">%0</div><div class="hint">Toplam proje ilerlemesi</div></div>
+        <div class="card wide">
+          <div class="section-title"><h2>Proje İlerlemesi</h2><span class="pill" id="progressLabel">%0</span></div>
+          <div class="bar"><span id="progressBar" style="width:0%"></span></div>
+          <p class="notice">Veriler bu cihazda saklanır. Düzenli olarak “Yedekle” butonuyla JSON yedeği alın.</p>
+        </div>
+        <div class="card wide">
+          <div class="section-title"><h2>Son Pozlar</h2></div>
+          <div id="recentList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="boq" class="view">
+      <div class="section-title"><h2>BOQ / Keşif Listesi</h2></div>
+      <div class="card">
+        <form id="boqForm" class="formgrid">
+          <div><label>Poz No</label><input id="bPoz" required placeholder="AS-001"></div>
+          <div class="full"><label>İş Kalemi</label><input id="bDesc" required placeholder="Alçıpan bölme duvar"></div>
+          <div><label>Birim</label><select id="bUnit"><option>m²</option><option>m³</option><option>mt</option><option>adet</option><option>kg</option><option>ton</option><option>götürü</option></select></div>
+          <div><label>Miktar</label><input id="bQty" type="number" step="0.01" min="0" required></div>
+          <div><label>Birim Fiyat (₺)</label><input id="bPrice" type="number" step="0.01" min="0" required></div>
+          <div style="align-self:end"><button class="btn primary" type="submit">Poz Ekle</button></div>
+        </form>
+      </div>
+      <div class="table-tools"><div class="section-title" style="margin:0"><h2>Kayıtlar</h2><span id="boqCount" class="pill">0 poz</span></div><div class="search"><input id="boqSearch" placeholder="Poz veya iş kalemi ara..." oninput="render()"></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Poz</th><th>İş Kalemi</th><th>Birim</th><th class="num">Miktar</th><th class="num">B. Fiyat</th><th class="num">Tutar</th><th></th></tr></thead><tbody id="boqRows"></tbody></table></div>
+    </section>
+
+    <section id="prices" class="view">
+      <div class="section-title"><h2>Poz Bazında Birim Fiyat</h2></div>
+      <div class="card">
+        <form id="priceForm" class="formgrid">
+          <div><label>Poz Seç</label><select id="pPoz"></select></div>
+          <div><label>Malzeme (₺)</label><input id="pMat" type="number" min="0" step="0.01" required></div>
+          <div><label>İşçilik (₺)</label><input id="pLab" type="number" min="0" step="0.01" required></div>
+          <div><label>Makine/Diğer (₺)</label><input id="pOther" type="number" min="0" step="0.01" value="0"></div>
+          <div style="align-self:end"><button class="btn primary" type="submit">Kaydet</button></div>
+        </form>
+      </div>
+      <div class="section-title"><h2>Birim Fiyat Dağılımı</h2></div>
+      <div class="table-wrap"><table><thead><tr><th>Poz</th><th>İş Kalemi</th><th class="num">Malzeme</th><th class="num">İşçilik</th><th class="num">Diğer</th><th class="num">Toplam</th></tr></thead><tbody id="priceRows"></tbody></table></div>
+    </section>
+
+    <section id="progress" class="view">
+      <div class="section-title"><h2>Hakediş Girişi</h2></div>
+      <div class="card">
+        <form id="progressForm" class="formgrid">
+          <div><label>Poz Seç</label><select id="hPoz"></select></div>
+          <div><label>Bu Dönem Miktarı</label><input id="hQty" type="number" min="0" step="0.01" required></div>
+          <div><label>Dönem</label><input id="hPeriod" placeholder="2026-01" required></div>
+          <div style="align-self:end"><button class="btn primary" type="submit">Hakedişe Ekle</button></div>
+        </form>
+      </div>
+      <div class="section-title"><h2>Hakediş Kayıtları</h2></div>
+      <div class="table-wrap"><table><thead><tr><th>Dönem</th><th>Poz</th><th>İş Kalemi</th><th class="num">Miktar</th><th class="num">B. Fiyat</th><th class="num">Tutar</th><th></th></tr></thead><tbody id="progressRows"></tbody></table></div>
+    </section>
+
+    <section id="summary" class="view">
+      <div class="section-title"><h2>Malzeme + İşçilik Özeti</h2></div>
+      <div class="table-wrap"><table><thead><tr><th>Poz</th><th>İş Kalemi</th><th class="num">BOQ Miktarı</th><th class="num">Malzeme Top.</th><th class="num">İşçilik Top.</th><th class="num">Diğer</th><th class="num">Genel Toplam</th></tr></thead><tbody id="summaryRows"></tbody></table></div>
+    </section>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY='as_boq_pro_v1';
+let db = load();
+
+function blank(){return {boq:[], prices:{}, progress:[]}}
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||blank()}catch(e){return blank()}}
+function save(){localStorage.setItem(KEY,JSON.stringify(db));render()}
+function money(v){return new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:2}).format(Number(v)||0)}
+function num(v){return new Intl.NumberFormat('tr-TR',{maximumFractionDigits:2}).format(Number(v)||0)}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1800)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+
+function openView(id){document.querySelectorAll('.tab,.view').forEach(x=>x.classList.remove('active'));const tab=document.querySelector(`.tab[data-view="${id}"]`);if(tab)tab.classList.add('active');document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>openView(b.dataset.view)));
+
+document.getElementById('boqForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const poz=bPoz.value.trim();
+  if(db.boq.some(x=>x.poz.toLowerCase()===poz.toLowerCase())) return toast('Bu poz zaten kayıtlı');
+  db.boq.push({id:crypto.randomUUID(),poz,desc:bDesc.value.trim(),unit:bUnit.value,qty:+bQty.value,price:+bPrice.value});
+  e.target.reset(); save(); toast('Poz eklendi');
+});
+document.getElementById('priceForm').addEventListener('submit',e=>{
+  e.preventDefault(); if(!pPoz.value)return;
+  db.prices[pPoz.value]={mat:+pMat.value,lab:+pLab.value,other:+pOther.value};
+  save(); toast('Birim fiyat kaydedildi');
+});
+document.getElementById('progressForm').addEventListener('submit',e=>{
+  e.preventDefault(); const item=db.boq.find(x=>x.id===hPoz.value); if(!item)return;
+  const existing=db.progress.filter(x=>x.boqId===item.id).reduce((s,x)=>s+x.qty,0);
+  const q=+hQty.value;
+  if(existing+q>item.qty) return toast('Toplam hakediş BOQ miktarını geçemez');
+  db.progress.push({id:crypto.randomUUID(),boqId:item.id,qty:q,period:hPeriod.value.trim()});
+  e.target.reset(); save(); toast('Hakediş eklendi');
+});
+function delBoq(id){
+  if(!confirm('Poz ve bağlı kayıtlar silinsin mi?'))return;
+  db.boq=db.boq.filter(x=>x.id!==id); delete db.prices[id]; db.progress=db.progress.filter(x=>x.boqId!==id); save();
+}
+function delProgress(id){db.progress=db.progress.filter(x=>x.id!==id);save()}
+
+function render(){
+  const boqRows=boqRowsEl=document.getElementById('boqRows'); boqRows.innerHTML='';
+  const q=(document.getElementById('boqSearch')?.value||'').toLocaleLowerCase('tr');
+  db.boq.filter(x=>!q||x.poz.toLocaleLowerCase('tr').includes(q)||x.desc.toLocaleLowerCase('tr').includes(q)).forEach(x=>boqRows.insertAdjacentHTML('beforeend',`<tr><td><b>${esc(x.poz)}</b></td><td>${esc(x.desc)}</td><td>${esc(x.unit)}</td><td class="num">${num(x.qty)}</td><td class="num">${money(x.price)}</td><td class="num"><b>${money(x.qty*x.price)}</b></td><td class="row-actions"><button onclick="delBoq('${x.id}')">🗑</button></td></tr>`));
+  if(!db.boq.length)boqRows.innerHTML='<tr><td colspan="7" class="empty">Henüz poz eklenmedi.</td></tr>';
+  boqCount.textContent=db.boq.length+' poz'; if(document.getElementById('kpiPozCount'))kpiPozCount.textContent=db.boq.length+' aktif poz';
+
+  const opts=db.boq.map(x=>`<option value="${x.id}">${esc(x.poz)} — ${esc(x.desc)}</option>`).join('');
+  pPoz.innerHTML=opts||'<option value="">Önce BOQ ekleyin</option>'; hPoz.innerHTML=pPoz.innerHTML;
+
+  priceRows.innerHTML='';
+  db.boq.forEach(x=>{const p=db.prices[x.id]||{mat:0,lab:0,other:0}; priceRows.insertAdjacentHTML('beforeend',`<tr><td><b>${esc(x.poz)}</b></td><td>${esc(x.desc)}</td><td class="num">${money(p.mat)}</td><td class="num">${money(p.lab)}</td><td class="num">${money(p.other)}</td><td class="num"><b>${money(p.mat+p.lab+p.other)}</b></td></tr>`)});
+  if(!db.boq.length)priceRows.innerHTML='<tr><td colspan="6" class="empty">BOQ kaydı bulunmuyor.</td></tr>';
+
+  progressRows.innerHTML='';
+  db.progress.forEach(h=>{const x=db.boq.find(b=>b.id===h.boqId); if(!x)return; progressRows.insertAdjacentHTML('beforeend',`<tr><td>${esc(h.period)}</td><td><b>${esc(x.poz)}</b></td><td>${esc(x.desc)}</td><td class="num">${num(h.qty)}</td><td class="num">${money(x.price)}</td><td class="num"><b>${money(h.qty*x.price)}</b></td><td class="row-actions"><button onclick="delProgress('${h.id}')">🗑</button></td></tr>`)});
+  if(!db.progress.length)progressRows.innerHTML='<tr><td colspan="7" class="empty">Henüz hakediş kaydı yok.</td></tr>';
+
+  summaryRows.innerHTML='';
+  db.boq.forEach(x=>{const p=db.prices[x.id]||{mat:0,lab:0,other:0}; summaryRows.insertAdjacentHTML('beforeend',`<tr><td><b>${esc(x.poz)}</b></td><td>${esc(x.desc)}</td><td class="num">${num(x.qty)}</td><td class="num">${money(x.qty*p.mat)}</td><td class="num">${money(x.qty*p.lab)}</td><td class="num">${money(x.qty*p.other)}</td><td class="num"><b>${money(x.qty*(p.mat+p.lab+p.other))}</b></td></tr>`)});
+  if(!db.boq.length)summaryRows.innerHTML='<tr><td colspan="7" class="empty">Özet için BOQ kaydı ekleyin.</td></tr>';
+
+  const totalBoq=db.boq.reduce((s,x)=>s+x.qty*x.price,0);
+  const totalProg=db.progress.reduce((s,h)=>{const x=db.boq.find(b=>b.id===h.boqId);return s+(x?h.qty*x.price:0)},0);
+  const pct=totalBoq?Math.min(100,totalProg/totalBoq*100):0;
+  kpiBoq.textContent=money(totalBoq); kpiProgress.textContent=money(totalProg); kpiRemaining.textContent=money(Math.max(0,totalBoq-totalProg)); kpiPercent.textContent='%'+num(pct);
+  progressLabel.textContent='%'+num(pct); progressBar.style.width=pct+'%';
+  recentList.innerHTML=db.boq.slice(-5).reverse().map(x=>`<div style="padding:10px 0;border-bottom:1px solid var(--line)"><b>${esc(x.poz)}</b> — ${esc(x.desc)} <span style="float:right">${money(x.qty*x.price)}</span></div>`).join('')||'<div class="empty">Kayıt bulunmuyor.</div>';
+}
+function exportData(){
+  const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='AS_BOQ_PRO_YEDEK_'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href);
+}
+function importData(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.boq||!d.prices||!d.progress)throw 0;db=d;save();toast('Yedek yüklendi')}catch(_){toast('Geçersiz yedek dosyası')}};r.readAsText(f);
+}
+function seedDemo(){
+  if(db.boq.length&&!confirm('Mevcut veriler silinip demo veri yüklensin mi?'))return;
+  db=blank();
+  const items=[
+    ['AS-001','Darbe dayanımlı çift karkas alçıpan bölme duvar','m²',250,2450,1200,900,350],
+    ['AS-002','Alçıpan giydirme duvar','m²',180,1650,850,600,200],
+    ['AS-003','Kaba sıva','m²',320,720,300,350,70],
+    ['AS-004','Saten alçı','m²',280,390,110,240,40]
+  ];
+  items.forEach((a,i)=>{const id=crypto.randomUUID();db.boq.push({id,poz:a[0],desc:a[1],unit:a[2],qty:a[3],price:a[4]});db.prices[id]={mat:a[5],lab:a[6],other:a[7]};if(i<2)db.progress.push({id:crypto.randomUUID(),boqId:id,qty:i?40:60,period:'2026-07'})});
+  save();toast('Demo veri yüklendi');
+}
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
+render();
+</script>
+</body>
+</html>
