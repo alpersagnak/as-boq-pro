@@ -1,0 +1,19 @@
+A.S BOQ PRO v12.0 - Canlı İnternet Fiyatları
+
+Yeni özellikler:
+- İnternet Fiyatları menüsü
+- Kullanıcı tanımlı JSON API / bayi fiyat servisi
+- Ürün adıyla internet kaynağında arama
+- Marka, model, birim, para birimi, tarih ve ürün linki
+- Eşleşme puanına göre sıralama
+- Seçilen fiyatı birim fiyat analizine tek tıkla aktarma
+- Fiyat kaynağı, fiyat tarihi ve internet modu kaydı
+
+Beklenen JSON örneği:
+{
+  "items": [
+    {"name":"Dalsan Premium 12.5 mm","brand":"Dalsan","model":"Premium","price":385,"unit":"m2","currency":"TRY","date":"2026-07-28","url":"https://..."}
+  ]
+}
+
+Not: Tarayıcıdan doğrudan çekim için kaynak servis CORS izni vermelidir. CORS vermeyen web siteleri için Supabase Edge Function / sunucu proxy entegrasyonu gerekir.

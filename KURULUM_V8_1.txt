@@ -1,0 +1,10 @@
+A.S BOQ PRO v8.1 - Disiplin Bazlı BOQ
+
+1. npm install
+2. npm run dev
+3. Üst menüden proje ve disiplin/ekip seçin.
+4. BOQ, Poz Kütüphanesi ve Birim Fiyat Analizi seçilen disipline göre otomatik filtrelenir.
+
+Mevcut eski BOQ satırları açıklama/kategori bilgilerine göre otomatik disipline atanır.
+Satırların disiplin alanı BOQ tablosundan değiştirilebilir.
+Yeni Supabase SQL işlemi gerektirmez.

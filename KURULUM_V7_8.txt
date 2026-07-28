@@ -1,0 +1,11 @@
+A.S BOQ PRO v7.8 – Ön Akustik Hesap Motoru
+
+1. ZIP içeriğini mevcut proje klasörüne kopyalayın.
+2. Mevcut .env dosyanızı koruyun.
+3. npm install
+4. npm run dev
+5. Tarayıcıda Ctrl + F5 yapın.
+
+Yeni Supabase SQL işlemi gerekmez.
+
+Not: Akustik hesap, sistem bileşenlerine dayalı ön tasarım tahminidir. Sertifikalı Rw değeri değildir; üretici föyü ve laboratuvar raporu ile doğrulanmalıdır.

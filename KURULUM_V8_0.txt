@@ -1,0 +1,13 @@
+A.S BOQ PRO v8.0 — Gelişmiş Çift Karkas Editörü
+
+Eklenenler:
+- 1. ve 2. karkas profil ölçülerini bağımsız belirleme
+- İkinci karkas için ayrı hazır profil seçimi
+- İkinci karkas için ayrı malzeme, derinlik, yüz ve et kalınlığı
+- "1. karkas ile aynı tut" senkronizasyon seçeneği
+- Bitmiş duvar kalınlığında iki farklı profil + ara boşluk hesabı
+- Canlı kesitte ikinci profil gerçek ölçüsüyle gösterim
+- Reçetede iki karkas profilinin ayrı malzeme satırları
+- Akustik ön hesapta iki profil derinliğinin birlikte değerlendirilmesi
+
+Yeni Supabase SQL işlemi gerekmez.

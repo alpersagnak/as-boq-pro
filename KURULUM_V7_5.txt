@@ -1,0 +1,18 @@
+A.S BOQ PRO v7.5 - PARAMETRİK İMALAT MOTORU
+
+1) Mevcut proje klasörünüzün yedeğini alın.
+2) Bu paketteki dosyaları mevcut as-boq-pro klasörüne kopyalayın.
+3) .env dosyanızı silmeyin veya üzerine yazmayın.
+4) Terminalde npm install ve npm run dev komutlarını çalıştırın.
+5) Tarayıcıda Ctrl+F5 yapın.
+
+YENİ ÖZELLİK
+- Sol menüde Parametrik İmalat ekranı
+- Alçıpan bölme duvar karkas, levha, yalıtım ve aksesuar seçimi
+- 1 m² için otomatik malzeme sarfiyatı
+- Malzeme ve işçilik birim fiyatları
+- Seçilen BOQ pozuna tek tıkla reçete uygulama
+- Birim Fiyat Analizi ile tam entegrasyon
+
+NOT
+Bu sürüm mevcut Supabase yapısında BOQ satırının analiz alanlarını kullanır. Ek SQL gerektirmez.

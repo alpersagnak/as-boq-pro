@@ -1,0 +1,17 @@
+A.S BOQ PRO v10.0 - MARKA VE ÜRÜN SEÇİMİ
+
+1. Paketi mevcut proje klasörüne çıkarın.
+2. Dosyaların üzerine yazılmasına izin verin.
+3. npm install
+4. npm run dev
+
+YENİ ÖZELLİKLER
+- Birim Fiyat Analizi > Malzeme bölümünde marka seçimi
+- Markaya bağlı ürün/model seçimi
+- Kısa üretici ve ürün grubu bilgisi
+- Teknik standart bilgisi
+- Onaylı/alternatif marka göstergesi
+- Malzeme kütüphanesinde mevcut marka seçeneklerinin ön izlemesi
+- Eski proje verileri otomatik uyarlanır
+
+Yeni Supabase SQL işlemi gerektirmez.

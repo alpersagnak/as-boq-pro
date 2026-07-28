@@ -1,0 +1,17 @@
+A.S BOQ PRO v7.6 – Akıllı Metraj ve Açıklıklar
+
+1. ZIP içindeki dosyaları mevcut A.S BOQ PRO klasörüne kopyalayın.
+2. Mevcut .env dosyanızı koruyun.
+3. Terminalde npm install ve npm run dev çalıştırın.
+4. Tarayıcıda Ctrl + F5 yapın.
+
+Yeni özellikler:
+- Duvar uzunluğu ve yüksekliği ile brüt alan hesabı
+- Kapı, pencere ve özel açıklık ekleme
+- Açıklık alanlarının net duvar alanından düşülmesi
+- Açıklık çevresine ilave dikme/lento profil hesabı
+- Levha, profil, yalıtım ve aksesuar için ayrı fire oranları
+- 1 m² reçete ile birlikte toplam proje miktarları
+- Brüt/net alan ve açıklık çevresi özet kartı
+
+Ek Supabase SQL işlemi gerekmez.

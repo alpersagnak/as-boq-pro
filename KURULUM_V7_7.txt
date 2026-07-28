@@ -1,0 +1,16 @@
+A.S BOQ PRO v7.7 – Hazır Sistemler ve Teknik Kart
+
+1. ZIP içeriğini mevcut A.S BOQ PRO proje klasörüne kopyalayın.
+2. .env dosyanızı koruyun.
+3. Terminalde npm install ve npm run dev çalıştırın.
+4. Tarayıcıda Ctrl+F5 yapın.
+
+YENİLİKLER
+- Hazır duvar sistemi/reçete başlangıçları
+- Sistem kodu ve üretici/marka alanı
+- Eksik olan duvar yüksekliği girişi
+- Yangın dayanımı, ses yalıtımı ve azami yükseklik için kullanıcı düzenlemeli teknik veri kartı
+- Girilen yüksekliğin önerilen yüksekliği aşması halinde akıllı uyarı
+- Teknik bilgilerin reçete şablonuyla birlikte saklanması
+
+Not: Hazır sistemler ön tasarım başlangıcıdır. Yangın, akustik ve azami yükseklik değerleri üretici sistem föyü ve proje şartnamesinden doğrulanmalıdır.

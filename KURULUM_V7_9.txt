@@ -1,0 +1,10 @@
+A.S BOQ PRO v7.9 — Çift Karkas Profil Arası Boşluk
+
+Yeni özellikler:
+- Çift karkasta iki profil sırası arasındaki boşluk mm olarak değiştirilebilir.
+- Bitmiş duvar kalınlığı bu boşluğu otomatik hesaba katar.
+- Canlı kesitte boşluk ayrı katman olarak gösterilir.
+- Akustik ön hesapta ayrık karkas boşluğunun katkısı dikkate alınır.
+
+Örnek: 40 mm profil + 20 mm boşluk + 40 mm profil + levhalar.
+Yeni Supabase SQL işlemi gerekmez.

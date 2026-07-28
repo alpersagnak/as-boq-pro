@@ -1,0 +1,16 @@
+A.S BOQ PRO v9.0 - AKILLI BOQ ASİSTANI
+
+Yeni özellikler:
+- Proje türü, alan, kat, bodrum ve havuz bilgileriyle başlangıç BOQ üretimi
+- Çoklu disiplin seçimi
+- İnşaat, mimari, mekanik, elektrik ve diğer disiplinler için hazır poz şablonları
+- Her ürün/imalat için kısa açıklama penceresi
+- Önizleme ve projeye tek tıkla ekleme
+- Mevcut poz numaralarını tekrar eklememe kontrolü
+
+Kurulum:
+1. Dosyaları mevcut proje klasörüne kopyalayın.
+2. npm install
+3. npm run dev
+
+Yeni Supabase SQL işlemi gerekmez.

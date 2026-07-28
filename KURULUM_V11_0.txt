@@ -1,0 +1,7 @@
+A.S BOQ PRO v11.0 - Otomatik Fiyat ve Otomatik Analiz
+
+- BOQ pozunda “Analizi Otomatik Oluştur” düğmesi hazır reçeteyi getirir.
+- Kaynak fiyatı kütüphaneden otomatik gelir; kaynak ve fiyat tarihi gösterilir.
+- Kullanıcı fiyatı değiştirince kayıt “Kullanıcı tanımlı” olur.
+- Özel malzeme/işçilik/ekipman/nakliye satırları kullanıcı tarafından eklenebilir.
+- Otomatik fiyatlar teklif/API entegrasyonu kurulana kadar başlangıç kütüphane fiyatıdır; kesin satın alma fiyatı olarak kullanılmamalıdır.
