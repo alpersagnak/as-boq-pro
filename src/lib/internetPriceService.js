@@ -69,3 +69,61 @@ export async function searchInternetPrices(sources, query) {
   const errors = settled.flatMap((result, index) => result.status === "rejected" ? [{ source: enabled[index]?.name, message: result.reason?.message || "Bağlantı hatası" }] : []);
   return { prices, errors };
 }
+
+const HISTORY_KEY = "asBoqPriceHistory";
+
+export function readPriceHistory() {
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; } catch { return []; }
+}
+
+export function appendPriceHistory(entry) {
+  const history = readPriceHistory();
+  const next = [{ id: crypto.randomUUID(), savedAt: new Date().toISOString(), ...entry }, ...history].slice(0, 2000);
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
+  return next;
+}
+
+export function parsePriceCsv(text, sourceName = "Excel / CSV") {
+  const lines = String(text || "").split(/\r?\n/).filter(Boolean);
+  if (lines.length < 2) return [];
+  const delimiter = lines[0].includes(";") ? ";" : ",";
+  const headers = lines[0].split(delimiter).map((x) => normalize(x));
+  const aliases = {
+    name: ["urun", "urun adi", "malzeme", "name", "product"], brand: ["marka", "brand"],
+    model: ["model", "seri"], price: ["fiyat", "birim fiyat", "price"], unit: ["birim", "unit"],
+    currency: ["para birimi", "doviz", "currency"], date: ["tarih", "date"], url: ["url", "link"]
+  };
+  const indexOf = (key) => headers.findIndex((h) => aliases[key].includes(h));
+  const idx = Object.fromEntries(Object.keys(aliases).map((key) => [key, indexOf(key)]));
+  return lines.slice(1).map((line, i) => {
+    const cols = line.split(delimiter).map((x) => x.trim().replace(/^"|"$/g, ""));
+    const rawPrice = cols[idx.price] || "0";
+    const price = Number(rawPrice.replace(/\./g, "").replace(",", ".").replace(/[^0-9.-]/g, "")) || 0;
+    return {
+      id: `csv-${Date.now()}-${i}`, sourceId: "csv", sourceName,
+      name: cols[idx.name] || "Ürün", brand: cols[idx.brand] || "", model: cols[idx.model] || "",
+      price, unit: cols[idx.unit] || "adet", currency: cols[idx.currency] || "TRY",
+      date: cols[idx.date] || new Date().toISOString().slice(0, 10), productUrl: cols[idx.url] || "",
+    };
+  }).filter((x) => x.price > 0);
+}
+
+export async function fetchExchangeRates() {
+  const response = await fetch("https://open.er-api.com/v6/latest/TRY");
+  if (!response.ok) throw new Error(`Kur servisi HTTP ${response.status}`);
+  const payload = await response.json();
+  const rates = payload?.rates || {};
+  return {
+    TRY: 1,
+    USD: rates.USD ? 1 / rates.USD : 0,
+    EUR: rates.EUR ? 1 / rates.EUR : 0,
+    GBP: rates.GBP ? 1 / rates.GBP : 0,
+    updatedAt: payload.time_last_update_utc || new Date().toISOString(),
+  };
+}
+
+export function convertToTry(price, currency, rates) {
+  if (!price) return 0;
+  if (!currency || currency === "TRY") return Number(price);
+  return Number(price) * Number(rates?.[currency] || 0);
+}

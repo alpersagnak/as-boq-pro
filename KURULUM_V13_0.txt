@@ -1,0 +1,24 @@
+A.S BOQ PRO v13.0 — Fiyat, Teklif ve Kur Merkezi
+
+EKLENENLER
+- İnternet JSON API fiyat kaynakları
+- Kullanıcı tanımlı manuel tedarikçi teklifleri
+- CSV fiyat listesi içe aktarma
+- TRY, USD, EUR ve GBP kur dönüşümü
+- Orijinal döviz fiyatı ile TL karşılığını birlikte gösterme
+- Seçilen fiyatı analiz satırına aktarma
+- Uygulanan fiyat geçmişini yerel olarak saklama
+- Ürün eşleşme puanı
+- Marka, model, kaynak ve tarih kaydı
+
+CSV BAŞLIKLARI
+Ürün;Marka;Model;Fiyat;Birim;Para Birimi;Tarih;URL
+
+Örnek:
+Dalsan Premium 12.5 mm;Dalsan;Premium;385;adet;TRY;2026-07-28;
+
+NOT
+- İnternet kaynağının JSON API sunması ve CORS erişimine izin vermesi gerekir.
+- CORS engelli kaynaklar için Supabase Edge Function / proxy kurulmalıdır.
+- Döviz kuru servisine erişilemezse kullanıcı TRY fiyatlarıyla çalışmaya devam edebilir.
+- Yeni Supabase SQL işlemi gerekmez.
