@@ -234,7 +234,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
 
 .wall-layer.gap{background:repeating-linear-gradient(90deg,rgba(148,163,184,.10) 0 8px,rgba(148,163,184,.25) 8px 10px);border:1px dashed rgba(148,163,184,.65);color:inherit;min-width:28px}
 .builder-fields label small{display:block;margin-top:4px;opacity:.72;font-size:.76rem}
-ls -lh /mnt/data/AS_BOQ_PRO_v8.0_Gelismis_Cift_Karkas_Editoru.zip
 .second-frame-box{margin-top:14px;padding:14px;border:1px dashed #b9cfd4;border-radius:12px;background:#f8fbfc}
 .second-frame-box .opening-head{margin-bottom:12px}
 .second-frame-box input:disabled,.second-frame-box select:disabled{opacity:.65;background:#eef3f4}
@@ -260,3 +259,14 @@ ls -lh /mnt/data/AS_BOQ_PRO_v8.0_Gelismis_Cift_Karkas_Editoru.zip
 /* v13.0 Fiyat, teklif, kur ve geÃ§miÅŸ merkezi */
 .price-hero-actions{display:flex;gap:9px;flex-wrap:wrap}.price-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.price-kpi-grid>div{background:#fff;border:1px solid #dce3ee;border-radius:14px;padding:16px}.price-kpi-grid span{display:block;color:#738096;font-size:12px;font-weight:700}.price-kpi-grid strong{display:block;margin-top:5px;font-size:23px}.manual-price-card,.price-history-card{background:#fff;border:1px solid #dce3ee;border-radius:16px;padding:20px;margin-bottom:16px}.manual-price-card h3{margin:0 0 4px}.manual-price-card p{margin:0 0 14px;color:#738096}.manual-price-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr .7fr .6fr 1.2fr auto auto;gap:9px}.manual-price-grid input,.manual-price-grid select{min-width:0;padding:10px;border:1px solid #cfd7e6;border-radius:9px}.price-history-card{overflow:auto}.price-history-card table{width:100%;border-collapse:collapse}.price-history-card th,.price-history-card td{padding:10px 12px;border-top:1px solid #e4eaf2;text-align:left}.price-history-card th{font-size:11px;color:#68768a;text-transform:uppercase}.internet-results{overflow:auto}.internet-results table{min-width:1050px}@media(max-width:1100px){.manual-price-grid{grid-template-columns:repeat(4,1fr)}}@media(max-width:760px){.price-kpi-grid{grid-template-columns:1fr 1fr}.manual-price-grid{grid-template-columns:1fr}.price-hero-actions{width:100%}.price-hero-actions button{flex:1}}
 
+
+/* v14.0 Profesyonel BOQ Grid */
+.v14-selection-bar{display:grid;grid-template-columns:auto auto minmax(150px,190px) minmax(140px,190px) repeat(4,auto);align-items:center;gap:8px}
+.v14-selection-bar select,.v14-selection-bar input{height:36px;border:1px solid #cfdede;border-radius:8px;padding:0 10px;background:#fff;min-width:0}
+.analysis-status{display:inline-flex;align-items:center;justify-content:center;min-width:70px;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900}
+.analysis-status.ready{background:#dcfce7;color:#166534}.analysis-status.missing{background:#fff1f2;color:#be123c}
+.boq-health-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.boq-health-strip>div{background:#fff;border:1px solid #dce7e7;border-radius:12px;padding:13px 15px}
+.boq-health-strip span{display:block;color:#71858e;font-size:11px;font-weight:800;text-transform:uppercase}.boq-health-strip strong{display:block;margin-top:5px;font-size:20px;color:#173f49}
+@media(max-width:1180px){.v14-selection-bar{grid-template-columns:repeat(4,minmax(0,1fr))}.v14-selection-bar>strong,.v14-selection-bar>span{grid-column:span 2}.boq-health-strip{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.v14-selection-bar{grid-template-columns:1fr 1fr}.boq-health-strip{grid-template-columns:1fr 1fr}}

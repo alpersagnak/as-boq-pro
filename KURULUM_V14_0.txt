@@ -1,0 +1,26 @@
+A.S BOQ PRO v14.0 — Profesyonel BOQ Grid
+
+Eklenenler:
+- BOQ satırlarında Analizli / Eksik durum göstergesi
+- BOQ analiz tamamlama özet kartları
+- Seçili satırlara toplu disiplin ve kategori atama
+- Seçili satırları Excel uyumlu biçimde panoya kopyalama
+- Çoklu çoğaltma ve silme araçlarının sadeleştirilmesi
+- Excel ve manuel satır girişlerinde alan eşleştirme düzeltmesi
+- İçe aktarılan miktarın korunması
+- v14.0 sürüm etiketi
+- styles.css içindeki artık komut satırının temizlenmesi
+
+Kurulum:
+1. Bu paketin içeriğini mevcut as-boq-pro klasörüne kopyalayın.
+2. PowerShell açın ve proje klasöründe çalıştırın:
+   npm install
+   npm run build
+3. Test için:
+   npm run dev
+4. GitHub'a göndermek için:
+   git add .
+   git commit -m "A.S BOQ PRO v14 profesyonel BOQ grid"
+   git push
+
+Not: Bu ortamda npm paket deposundaki geçici 404 hatası nedeniyle build doğrulaması tamamlanamadı. Kaynak kod düzenlemeleri tamamlandı.

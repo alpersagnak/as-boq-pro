@@ -81,16 +81,16 @@ function load() {
   return { projects: [defaultProject()], activeProjectId: null, activeDiscipline: "construction" };
 }
 
-function createBoqRow(item) {
+function createBoqRow(item = {}) {
   return {
     id: id(),
-    pozNo: item.pozNo,
-    description: item.isKalemi,
-    unit: item.birim,
-    type: item.tur,
-    category: item.kategori,
+    pozNo: item.pozNo || item.code || "",
+    description: item.description || item.isKalemi || "Yeni iş kalemi",
+    unit: item.unit || item.birim || "adet",
+    type: item.type || item.tur || "Manuel",
+    category: item.category || item.kategori || "Diğer",
     discipline: item.discipline || inferDiscipline(item),
-    quantity: 0,
+    quantity: Number(item.quantity ?? item.miktar) || 0,
     materials: [],
     labors: [],
     equipments: [],
@@ -199,6 +199,22 @@ function reducer(state, action) {
                 ...project,
                 boqRows: project.boqRows.filter(
                   (row) => !action.rowIds.includes(row.id)
+                ),
+              }
+            : project
+        ),
+      };
+
+
+    case "BULK_UPDATE_BOQ_ROWS":
+      return {
+        ...state,
+        projects: state.projects.map((project) =>
+          project.id === action.projectId
+            ? {
+                ...project,
+                boqRows: project.boqRows.map((row) =>
+                  action.rowIds.includes(row.id) ? { ...row, ...action.patch } : row
                 ),
               }
             : project

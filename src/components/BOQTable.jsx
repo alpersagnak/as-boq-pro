@@ -82,6 +82,8 @@ export default function BOQTable({ onNavigate, onSelectAnalysis, notify }) {
   const [selectedCount, setSelectedCount] = useState(0);
   const [selectedTotal, setSelectedTotal] = useState(0);
   const [isDraggingFile, setIsDraggingFile] = useState(false);
+  const [bulkDiscipline, setBulkDiscipline] = useState("");
+  const [bulkCategory, setBulkCategory] = useState("");
 
   const rowData = useMemo(
     () =>
@@ -160,6 +162,15 @@ export default function BOQTable({ onNavigate, onSelectAnalysis, notify }) {
         editable: false,
         valueFormatter: currencyFormatter,
         cellStyle: { fontWeight: 800 },
+      },
+      {
+        headerName: "Durum",
+        width: 115,
+        editable: false,
+        valueGetter: ({ data }) => data.totalPrice > 0 ? "Analizli" : "Eksik",
+        cellRenderer: ({ value }) => (
+          <span className={`analysis-status ${value === "Analizli" ? "ready" : "missing"}`}>{value}</span>
+        ),
       },
       {
         headerName: "Analiz",
@@ -267,6 +278,34 @@ export default function BOQTable({ onNavigate, onSelectAnalysis, notify }) {
     if (!ids.length) return;
     dispatch({ type: "DUPLICATE_BOQ_ROWS", projectId: activeProject.id, rowIds: ids });
     gridRef.current?.api?.deselectAll();
+  };
+
+  const applyBulkUpdate = () => {
+    const ids = selectedIds();
+    if (!ids.length) return;
+    const patch = {};
+    if (bulkDiscipline) patch.discipline = bulkDiscipline;
+    if (bulkCategory.trim()) patch.category = bulkCategory.trim();
+    if (!Object.keys(patch).length) {
+      notify?.("warning", "Toplu düzenleme seçilmedi", "Disiplin veya kategori girin.");
+      return;
+    }
+    dispatch({ type: "BULK_UPDATE_BOQ_ROWS", projectId: activeProject.id, rowIds: ids, patch });
+    notify?.("success", "Toplu güncelleme tamamlandı", `${ids.length} BOQ satırı güncellendi.`);
+  };
+
+  const copySelected = async () => {
+    const rows = gridRef.current?.api?.getSelectedRows() || [];
+    if (!rows.length) return;
+    const header = ["Poz No", "İş Kalemi", "Birim", "Disiplin", "Kategori", "Miktar", "Birim Fiyat", "Tutar"];
+    const body = rows.map((row) => [row.pozNo, row.description, row.unit, disciplineLabel(row.discipline), row.category, row.quantity, row.totalPrice, row.amount]);
+    const text = [header, ...body].map((cells) => cells.join("\t")).join("\n");
+    try {
+      await navigator.clipboard.writeText(text);
+      notify?.("success", "Seçim panoya kopyalandı", `${rows.length} satır Excel biçiminde kopyalandı.`);
+    } catch {
+      notify?.("error", "Kopyalama başarısız", "Tarayıcı pano iznini kontrol edin.");
+    }
   };
 
   const processExcelFile = async (file) => {
@@ -437,15 +476,18 @@ export default function BOQTable({ onNavigate, onSelectAnalysis, notify }) {
         />
       </div>
 
-      <div className="selection-bar ag-selection-bar">
+      <div className="selection-bar ag-selection-bar v14-selection-bar">
         <strong>{selectedCount} satır seçildi</strong>
         <span>Seçili toplam: <b>{formatMoney(selectedTotal, activeProject.currency)}</b></span>
-        <button className="secondary" type="button" disabled={!selectedCount} onClick={duplicateSelected}>
-          Seçilenleri Çoğalt
-        </button>
-        <button className="delete-button" type="button" disabled={!selectedCount} onClick={deleteSelected}>
-          Seçilenleri Sil
-        </button>
+        <select value={bulkDiscipline} onChange={(e) => setBulkDiscipline(e.target.value)} disabled={!selectedCount}>
+          <option value="">Disiplin seç</option>
+          {DISCIPLINES.filter((item) => item.id !== "all").map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
+        </select>
+        <input value={bulkCategory} onChange={(e) => setBulkCategory(e.target.value)} placeholder="Toplu kategori" disabled={!selectedCount} />
+        <button className="secondary" type="button" disabled={!selectedCount} onClick={applyBulkUpdate}>Uygula</button>
+        <button className="secondary" type="button" disabled={!selectedCount} onClick={copySelected}>Kopyala</button>
+        <button className="secondary" type="button" disabled={!selectedCount} onClick={duplicateSelected}>Çoğalt</button>
+        <button className="delete-button" type="button" disabled={!selectedCount} onClick={deleteSelected}>Sil</button>
       </div>
 
       <div
@@ -492,6 +534,13 @@ export default function BOQTable({ onNavigate, onSelectAnalysis, notify }) {
           onSelectionChanged={updateSelectionSummary}
           overlayNoRowsTemplate='<span class="ag-empty-message">Henüz BOQ kalemi eklenmedi.</span>'
         />
+      </div>
+
+      <div className="boq-health-strip">
+        <div><span>Görünen Poz</span><strong>{rowData.length}</strong></div>
+        <div><span>Analizi Tamamlanan</span><strong>{rowData.filter((row) => row.totalPrice > 0).length}</strong></div>
+        <div><span>Eksik Analiz</span><strong>{rowData.filter((row) => row.totalPrice <= 0).length}</strong></div>
+        <div><span>Analiz Tamamlama</span><strong>{rowData.length ? `${Math.round((rowData.filter((row) => row.totalPrice > 0).length / rowData.length) * 100)}%` : "0%"}</strong></div>
       </div>
 
       <div className="boq-total-strip">
