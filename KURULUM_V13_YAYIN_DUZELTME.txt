@@ -1,0 +1,24 @@
+A.S BOQ PRO v13 - GITHUB PAGES YAYIN DUZELTME
+
+SORUN:
+GitHub Pages eski kök index.html dosyasını gösteriyordu. React/Vite kaynak kodu derlenmeden yayınlanıyordu.
+
+BU PAKET:
+- v13 kaynak kodunu içerir.
+- Eksik index.html dosyasını ekler.
+- GitHub Actions ile otomatik Vite build + Pages deploy iş akışını ekler.
+- node_modules içermez.
+
+KURULUM (PowerShell):
+1) ZIP'i İndirilenler klasörüne indirin.
+2) Aşağıdaki komutlarda ZIP adını gerektiğinde düzeltin:
+
+cd C:\Users\alper\Documents\GitHub\as-boq-pro
+Expand-Archive -Path "$env:USERPROFILE\Downloads\AS_BOQ_PRO_v13.1_GitHub_Pages_Duzeltme.zip" -DestinationPath . -Force
+git add .
+git commit -m "v13.1 GitHub Pages React yayin duzeltmesi"
+git push
+
+3) GitHub > repository > Settings > Pages ekranında Source olarak GitHub Actions seçili olmalıdır.
+4) GitHub > Actions bölümünde yeşil onay gelmesini bekleyin.
+5) Sayfayı Ctrl+F5 ile yenileyin.

@@ -1,0 +1,23 @@
+A.S BOQ PRO v5.1 — EXCEL AKTARIM VE SÜRÜKLE-BIRAK
+
+YENİ ÖZELLİKLER
+- XLSX, XLS ve CSV dosyasını BOQ ekranına sürükleyip bırakma
+- Gerçek XLSX dışa aktarma
+- CSV dışa aktarma
+- Seçilen BOQ satırlarının toplam tutarını gösterme
+- Filtre ve sıralamaları tek tuşla sıfırlama
+- AG Grid profesyonel BOQ özellikleri korunmuştur
+
+KURULUM
+1. Çalışan terminalde Ctrl + C yapın.
+2. ZIP dosyasını açın.
+3. AS_BOQ_PRO_v5_1_Excel_Aktarim klasörünün içindeki tüm dosyaları kopyalayın.
+4. C:\Users\alper\Documents\GitHub\as-boq-pro klasörüne yapıştırın.
+5. Hedefteki dosyaları değiştir seçeneğini kullanın.
+6. YENİ terminal açın.
+7. Sırayla çalıştırın:
+   npm install
+   npm run dev
+
+NOT
+Vite çalışan terminale npm install yazmayın. Kurulum için yeni terminal açın.

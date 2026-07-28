@@ -1,0 +1,32 @@
+A.S BOQ PRO v4.2 — EXCEL BENZERİ BOQ
+
+YENİ ÖZELLİKLER
+- BOQ hücrelerini doğrudan tablo içinde düzenleme
+- Poz, açıklama, birim, kategori ve miktar düzenleme
+- Çoklu satır seçimi
+- Görünen satırların tümünü seçme
+- Seçili satırları toplu silme
+- Seçili satırları çoğaltma
+- Manuel BOQ satırı oluşturma
+- Excel'den kopyala/yapıştır ile toplu BOQ aktarımı
+- Sabit tablo başlığı
+- Sabit seçim sütunu
+- Satır numaraları
+- Mevcut proje, poz, analiz ve hakediş verilerini koruyan v4.1 geçişi
+
+KURULUM
+1. Çalışan terminalde Ctrl+C yapın.
+2. ZIP'i açın.
+3. AS_BOQ_PRO_v4_2 klasörünün İÇİNDEKİ bütün dosyaları kopyalayın.
+4. Şu klasöre yapıştırın:
+   C:\Users\alper\Documents\GitHub\as-boq-pro
+5. "Hedefteki dosyaları değiştir" seçin.
+6. VS Code terminalinde:
+   npm install
+   npm run dev
+
+EXCEL'DEN AKTARMA SÜTUN SIRASI
+Poz No | İş Kalemi | Birim | Tür | Kategori | Miktar
+
+ÖRNEK
+AS-001 | Alçıpan bölme duvar | m² | Mimari | Alçıpan | 150

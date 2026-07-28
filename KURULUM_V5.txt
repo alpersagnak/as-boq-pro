@@ -1,0 +1,34 @@
+A.S BOQ PRO v5.0 — AG GRID PROFESYONEL BOQ
+
+YENİ ÖZELLİKLER
+- AG Grid tabanlı hızlı BOQ ekranı
+- Hücre içinde doğrudan düzenleme
+- Sıralama ve sütun filtreleme
+- Genel hızlı arama
+- Sütun genişletme ve sabit sütunlar
+- Çoklu satır seçme
+- Filtrelenmiş satırların tümünü seçme
+- Toplu silme ve çoğaltma
+- Boş BOQ satırı ekleme
+- Excel .xlsx / .xls / .csv içe aktarma
+- CSV dışa aktarma
+- Sayfalama: 25 / 50 / 100 / 250 satır
+- Hücre düzenleme geri alma altyapısı
+- Mevcut v4.2 verilerini otomatik taşıma
+
+KURULUM
+1. Terminalde Ctrl+C yapın.
+2. ZIP dosyasını açın.
+3. AS_BOQ_PRO_v5_0_AG_Grid klasörünün içindeki tüm dosyaları şuraya kopyalayın:
+   C:\Users\alper\Documents\GitHub\as-boq-pro
+4. Hedefteki dosyaları değiştir seçin.
+5. Terminalde çalıştırın:
+   npm install
+   npm run dev
+
+EXCEL SÜTUN BAŞLIKLARI
+Poz No veya Poz
+İş Kalemi veya Açıklama
+Birim
+Kategori
+Miktar

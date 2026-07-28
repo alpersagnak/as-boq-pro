@@ -1,0 +1,34 @@
+A.S BOQ PRO v6.0 — POZ ANALİZ MOTORU
+
+YENİ ÖZELLİKLER
+- Malzeme analizi
+- İşçilik analizi
+- Ekipman / makine analizi
+- Nakliye analizi
+- Malzemelerde fire oranı
+- Şantiye genel gideri
+- Genel gider
+- Kâr oranı
+- Doğrudan maliyet hesabı
+- Nihai birim fiyat hesabı
+- Analiz özet kartları
+- Mevcut v5.0 ve önceki verilerin otomatik aktarımı
+
+KURULUM
+1. Çalışan terminalde Ctrl + C yapın.
+2. ZIP dosyasını tamamen çıkarın.
+3. AS_BOQ_PRO_v6_0_Poz_Analiz_Motoru klasörünün içindeki tüm dosyaları kopyalayın.
+4. C:\Users\alper\Documents\GitHub\as-boq-pro klasörüne yapıştırın.
+5. "Hedefteki dosyaları değiştir" seçin.
+6. VS Code'da YENİ terminal açın.
+7. Sırayla çalıştırın:
+   npm install
+   npm run dev
+
+TEST
+1. BOQ Yönetimi bölümünden bir poz ekleyin.
+2. Birim Fiyat Analizi bölümüne girin.
+3. Malzeme, işçilik, ekipman ve nakliye kaynağı ekleyin.
+4. Sarfiyat ve birim fiyat girin.
+5. Genel gider ve kâr yüzdelerini girin.
+6. Nihai birim fiyatın BOQ'ya otomatik yansıdığını kontrol edin.
